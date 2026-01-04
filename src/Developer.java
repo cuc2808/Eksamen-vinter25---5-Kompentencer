@@ -27,12 +27,8 @@ public class Developer {
                 skill = skillInList;
             }
         }
-
         if (skills.contains(skill)) {
-            if (0 <= (skill.level += amount) && (skill.level += amount) < 11) {
                 skill.setLevel(skill.level += amount);
-            }
-
         } else {
             System.out.println("That skill doesn't exist");
         }

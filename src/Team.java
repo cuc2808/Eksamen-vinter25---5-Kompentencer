@@ -23,14 +23,11 @@ public class Team {
     }
 
     public void removeDeveloper(String developerName) {
-        Developer developer = findDeveloper(developerName);
 
-        while (true) {
-            if (developers.contains(developer)) {
+        for (Developer developer : developers) {
+            if (developer.getName().equalsIgnoreCase(developerName)) {
                 developers.remove(developer);
                 return;
-            } else {
-                System.out.println("That developer doesn't exist.");
             }
         }
     }
@@ -48,14 +45,15 @@ public class Team {
     }
 
     public void printTeamOverview() {
-        System.out.println("*========= Overview of Team: " + teamName.toUpperCase() + " =========*\n");
+        System.out.println("===== Overview of Team: " + teamName.toUpperCase() + " ======\n");
         for (Developer developer : developers) {
             System.out.println("Developer: " + developer.getName());
             System.out.println("Skillset:");
             for (Skill skill : developer.skills) {
                 System.out.println(" - " + skill.getName() + " LVL: " + skill.getLevel());
             }
-            System.out.println("\n------------------------------\n");
+            System.out.println("\n-----------------------------------------\n");
+
         }
     }
 //
@@ -113,7 +111,7 @@ public class Team {
             System.out.println(i + ". " + topDeveloperName + "LVL: " + topDeveloperLVL);
             developersRankedList.remove(developersRankedList.firstEntry().getKey());
         }
-        System.out.println("==================================");
+        System.out.println("==========================================");
     }
 
     public void bestDeveloperForSkill(String skillName) {
@@ -132,13 +130,17 @@ public class Team {
     public void findDevelopersMeetingRequirements(String skillName, int lvlRequirement) {
         LinkedHashMap<Developer, Integer> developersRankedList = rankDevelopersForSkill(skillName);
         System.out.println("List of developers that meet the requirements:");
-        System.out.println(("=== ranked by skill level === " + "\n"));
         while (!developersRankedList.isEmpty()) {
             String topDeveloperName = developersRankedList.firstEntry().getKey().getName();
             int topDeveloperLVL = developersRankedList.firstEntry().getValue();
-            System.out.println(" - " + topDeveloperName + "LVL: " + topDeveloperLVL);
-            developersRankedList.remove(developersRankedList.firstEntry().getKey());
+            if (topDeveloperLVL >= lvlRequirement) {
+                System.out.println(" - " + topDeveloperName + " LVL: " + topDeveloperLVL);
+                developersRankedList.remove(developersRankedList.firstEntry().getKey());
+            } else if (topDeveloperLVL < lvlRequirement) {
+                return;
+            }
         }
-        System.out.println("==================================");
+        System.out.println("\n");
+        System.out.println("==========================================\n\n");
     }
 }
