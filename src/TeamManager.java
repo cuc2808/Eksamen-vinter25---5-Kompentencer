@@ -90,6 +90,7 @@ public class TeamManager {
 
     public void teamMenu() {
 
+        while(true){
         System.out.println("\n================= Menu ==================\n");
 
         System.out.println("1. Update Developer skills");
@@ -100,7 +101,6 @@ public class TeamManager {
         System.out.println("6. List All Developers That Meet A Certain Skill And Level");
         System.out.println("7. Close Application");
 
-        while(true){
             int input = ui.userIntInput();
             if(input == 1) {
                 updateDeveloperMenu();
