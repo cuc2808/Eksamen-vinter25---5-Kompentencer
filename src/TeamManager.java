@@ -90,7 +90,6 @@ public class TeamManager {
 
     public void teamMenu() {
 
-        while(true){
         System.out.println("\n================= Menu ==================\n");
 
         System.out.println("1. Update Developer skills");
@@ -100,23 +99,32 @@ public class TeamManager {
         System.out.println("5. List Top X Developers For a Certain Skill");
         System.out.println("6. List All Developers That Meet A Certain Skill And Level");
         System.out.println("7. Close Application");
+        while(true){
 
             int input = ui.userIntInput();
             if(input == 1) {
                 updateDeveloperMenu();
+                teamMenu();
             } else if (input == 2) {
                 addDeveloperMenu();
+                teamMenu();
             } else if (input == 3) {
                 removeMenu();
+                teamMenu();
             } else if (input == 4) {
                 bestFromSkill();
+                teamMenu();
             } else if (input == 5) {
                 topXListFromSkill();
+                teamMenu();
             } else if (input == 6) {
                 meetASkillMenu();
+                teamMenu();
             } else if (input == 7){
                 closeApp();
                 return;
+            } else {
+                System.out.println("Invalid input, try again.");
             }
         }
     }
